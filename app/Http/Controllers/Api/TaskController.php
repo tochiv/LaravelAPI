@@ -41,7 +41,7 @@ class TaskController extends Controller
      */
     public function show(Task $task): JsonResponse
     {
-        return  response()->json([
+        return response()->json([
             'status' => true,
             'task' => $task
         ], 200);
