@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
@@ -18,7 +17,8 @@ class TaskController extends Controller
         $tasks = Task::all();
 
         return response()->json([
-           'tasks' => $tasks
+            'status' => true,
+            'tasks' => $tasks
         ]);
     }
 
@@ -30,9 +30,10 @@ class TaskController extends Controller
         $task = Task::create($request->all());
 
         return response()->json([
+            'status' => true,
             'message' => "Task Created successfully!",
             'task' => $task
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -41,6 +42,7 @@ class TaskController extends Controller
     public function show(Task $task): JsonResponse
     {
         return  response()->json([
+            'status' => true,
             'task' => $task
         ], 200);
     }
@@ -57,6 +59,7 @@ class TaskController extends Controller
         $task->update($request->all());
 
         return response()->json([
+            'status' => true,
             'message' => "Post Updated successfully!",
             'task' => $task
         ], 200);
@@ -70,6 +73,7 @@ class TaskController extends Controller
         $task->delete();
 
         return response()->json([
+            'status' => true,
             'message' => "Task Deleted successfully!"
         ], 200);
     }
